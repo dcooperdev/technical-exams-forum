@@ -1,0 +1,36 @@
+<div>
+  <div [ngStyle]="{ 'background-image': 'url(' + publicationData?.image + ')'}">
+    <div></div>
+  </div>
+
+  <div>
+    <div>
+
+      <div>
+        <h5 id="title">{{ publicationData?.title }} <small>Fecha: {{ publicationData?.createdDate }}</small></h5>
+        <p>{{ publicationData?.body }}</p>
+      </div>
+
+    </div>
+    <div id="likes-and-comments" *ngIf="!owner && userData !== null">
+
+      <app-like [liked]="liked" (newLike)="newLike()"></app-like>
+
+      <p>Likes: {{publicationData?.likes.length}}</p>
+
+      <app-comment [commented]="commented" (newComment)="newComment( $event )"></app-comment>
+
+    </div>
+  </div>
+
+  <div *ngIf="publicationData?.comments?.length > 0">
+    <h4>Comments:</h4>
+    <ul>
+      <li *ngFor="let comment of publicationData?.comments">
+        <p>{{ comment.createdDate | date }} <strong>{{ comment.fullname }}</strong></p>
+        <p>{{ comment.comment }}</p>
+      </li>
+    </ul>
+  </div>
+
+</div>

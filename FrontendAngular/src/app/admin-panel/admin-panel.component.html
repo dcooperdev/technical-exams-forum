@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <h4>Seguro que desea eliminar la publicacion de <strong>{{publication?.owner}}: {{publication?.title}}</strong></h4>
+  </div>
+  <div>
+    <div>
+      <section>
+        <img [src]="publication?.image" alt="publication-image" width="250" />
+      </section>
+      <section>
+        <p>{{publication?.body}}</p>
+      </section>
+      <section>
+        <div *ngFor="let comment of publication?.comments">
+          <ul>
+            <li>Date: {{comment.createdDate}}</li>
+            <li>Comment: {{comment.comment}}</li>
+          </ul>
+        </div>
+        <div>Likes: {{publication?.likes.length}}</div>
+      </section>
+    </div>
+  </div>
+  <div>
+    <button [routerLink]="['/']">Cancelar</button>
+    <button (click)="delete()">Eliminar</button>
+  </div>
+</div>

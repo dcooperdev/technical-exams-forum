@@ -1,0 +1,23 @@
+<section>
+  <form [formGroup]="publicationForm" (ngSubmit)="submit()">
+    <div>
+      <label for="title">Titulo</label>
+      <input type="text" id="title" placeholder="Title" formControlName="title">
+    </div>
+
+    <div>
+      <label for="exampleFormControlTextarea1">Cuerpo de la publicación</label>
+      <textarea id="exampleFormControlTextarea1" rows="3" formControlName="body"></textarea>
+    </div>
+
+    <div>
+      <label for="image">Image URL</label>
+      <input type="text" id="image" placeholder="http://example.com/my-picture.jpg" formControlName="image">
+    </div>
+
+    <button type="submit">
+      <span *ngIf="edit else create">Editar</span>
+      <ng-template #create>Crear</ng-template>
+    </button>
+  </form>
+</section>

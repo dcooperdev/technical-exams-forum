@@ -1,0 +1,5 @@
+module.exports.login = require('./login.routes')
+module.exports.signup = require('./signup.routes')
+module.exports.publication = require('./publication.routes')
+module.exports.like = require('./like.routes')
+module.exports.comment = require('./comment.routes')

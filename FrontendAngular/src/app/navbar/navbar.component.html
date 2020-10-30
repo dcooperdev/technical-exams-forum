@@ -1,0 +1,46 @@
+<nav>
+  <div *ngIf="!session else userdata">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/']">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/login']">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/signup']">
+        <mat-icon>signup</mat-icon>
+        <span>Signup</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <ng-template #userdata>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/']">
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/new']">
+          <mat-icon>new</mat-icon>
+          <span>Crear publicación</span>
+        </button>
+        <button mat-menu-item (click)="closeSession()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+      <span id="welcome-user">Bienvenido {{ session.complete_name }}</span>
+    </div>
+  </ng-template>
+</nav>

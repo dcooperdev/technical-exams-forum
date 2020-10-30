@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <div>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ publication?.title }}</mat-card-title>
+      <mat-card-subtitle>{{ publication?.owner }}</mat-card-subtitle>
+    </div>
+    <p>
+      <mat-icon [matBadge]="likes()" matBadgeColor="warn" matBadgeOverlap="false">favorite</mat-icon>
+        <!-- Include text description of the icon's meaning for screen-readers -->
+        <span class="cdk-visually-hidden">
+          Example with a home icon with overlaid badge showing the number 15
+        </span>
+    </p>
+  </mat-card-header>
+  <img mat-card-image *ngIf="publication?.image" [src]="publication?.image" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{ publication?.body }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button [routerLink]="['/publication', publication._id]">VER</button>
+    <button mat-button *ngIf="user?.username_email === publication?.owner" [routerLink]="['/new', publication._id]">EDITAR</button>
+    <button mat-button *ngIf="user?.rol === 'admin'" [routerLink]="['/admin', publication._id]">ELIMINAR</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,7 @@
+<div *ngIf="!commented">
+  <div>
+    <label for="exampleFormControlTextarea1"><h4>Deja tu comentario:</h4></label>
+    <textarea #text id="exampleFormControlTextarea1" rows="3" formControlName="body"></textarea>
+    <button (click)="comment(text.value)">Comentar</button>
+  </div>
+</div>

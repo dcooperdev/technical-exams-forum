@@ -1,0 +1,15 @@
+<section>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div>{{ error }}</div>
+    <div>
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" id="exampleInputEmail1" placeholder="test@host.com" formControlName="username_email">
+      <small id="emailHelp">Nunca compartiremos su email con nadie mas.</small>
+    </div>
+    <div>
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" id="exampleInputPassword1" formControlName="password">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</section>

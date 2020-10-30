@@ -1,0 +1,5 @@
+<mat-grid-list responsive="true" cols="3">
+  <mat-grid-tile *ngFor="let publication of publicationsList">
+    <app-publication [publication]="publication" [user]="user"></app-publication>
+  </mat-grid-tile>
+</mat-grid-list>

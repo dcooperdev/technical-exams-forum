@@ -1,0 +1,6 @@
+<div *ngIf="!liked else alreadyliked">
+  <button (click)="like()">🧡 Me gusta</button>
+</div>
+<ng-template #alreadyliked>
+  <p>🧡 Esta publicacion te gusta</p>
+</ng-template>
