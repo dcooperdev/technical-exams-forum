@@ -76,9 +76,11 @@ export const Post = ({post, actualUser}) => {
                             Ver
                         </Button>
                     </Link>
-                    {actualUser?.username_email === post?.owner && <Button variant="contained" color="primary">
+                    {actualUser?.username_email === post?.owner && <Link to={"/edit/"+post._id}>
+                      <Button variant="contained" color="primary">
                         Editar
-                    </Button>}
+                      </Button>
+                    </Link>}
                     {actualUser?.rol === 'admin' && <Button variant="contained" color="secondary">
                         Borrar
                     </Button>}

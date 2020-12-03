@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import AuthRoute from '../HOC/AuthRoute';
 import Login from "../views/Login";
 import PostDetail from "../views/PostDetail";
-import NewPost from "../views/newPost";
+import NewPost from "../views/ABMPost";
 import Posts from "../views/Posts";
 import Signup from "../views/Signup";
 import MasterView from "../middleware/MasterView";
@@ -31,12 +31,17 @@ const RouterApp = props => {
                 <MasterView {...props}>
                     <PostDetail {...props} />
                 </MasterView>
-            )}/>
+            )} />
             <AuthRoute exact path="/new" type="user">
                 <MasterView>
                     <NewPost />
                 </MasterView>
             </AuthRoute>
+            <AuthRoute exact path="/edit/:id" type="user" render={props => (
+                <MasterView {...props}>
+                    <NewPost {...props} />
+                </MasterView>
+            )} />
             <Route component={Posts} />
         </Switch>
     )

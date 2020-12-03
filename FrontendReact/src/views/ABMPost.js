@@ -7,14 +7,39 @@ import { getTextFieldData } from '../utils/util-querys';
 import { Card, TextField, CardContent, Typography, Button  } from '@material-ui/core/';
 import { createPosts } from '../services/posts';
 
-class PostDetail extends Component {
+class ABMPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: '',
             body: '',
-            image: ''
+            image: '',
+            edit: false
         }
+    }
+
+    componentDidMount() {
+        if (this.props.match && this.props.match.params.id) {
+            const { id } = this.props.match.params;
+            const { posts } = this.props;
+            const post = posts.find(post => post._id === id);
+
+            this.setState({
+                title: post.title,
+                body: post.body,
+                image: post.image,
+                edit: true
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            title: '',
+            body: '',
+            image: '',
+            edit: false
+        });
     }
 
     handleChange = (event) => {
@@ -24,6 +49,11 @@ class PostDetail extends Component {
     handleNewPost = async () => {
         this.props.dispatchSetLoading(true);
         await createPosts(this.state, this.success, this.fail);
+    }
+
+    handleUpdatePost = async () => {
+        this.props.dispatchSetLoading(true);
+        // await createPosts(this.state, this.success, this.fail);
     }
 
     success = (response) => {
@@ -37,17 +67,20 @@ class PostDetail extends Component {
     }
 
     render() {
+        const { title, body, image, edit } = this.state;
         return (
             <Card>
                 <CardContent>
                     <Typography gutterBottom variant="h4" component="h2">
-                        New post
+                        {(!edit) ? 'New' : 'Edit'} post
                     </Typography>
                     <TextField
                         id="title"
                         label="Title"
                         name="title"
+                        defaultValue={title}
                         onChange={this.handleChange}
+                        
                         variant="outlined"
                         fullWidth
                     />
@@ -55,7 +88,9 @@ class PostDetail extends Component {
                         id="image"
                         label="Image URL"
                         name="image"
+                        defaultValue={image}
                         onChange={this.handleChange}
+                        
                         variant="outlined"
                         fullWidth
                     />
@@ -63,6 +98,7 @@ class PostDetail extends Component {
                         id="body"
                         label="body"
                         name="body"
+                        defaultValue={body}
                         onChange={this.handleChange}
                         multiline
                         rows={4}
@@ -71,7 +107,8 @@ class PostDetail extends Component {
                     />
                 </CardContent>
                 <CardContent>
-                    <Button variant="contained" color="primary" onClick={this.handleNewPost}>Create</Button>
+                    {!edit && <Button variant="contained" color="primary" onClick={this.handleNewPost}>Create</Button>}
+                    { edit && <Button variant="contained" color="primary" onClick={this.handleUpdatePost}>Update</Button>}
                 </CardContent>
             </Card>
         );
@@ -91,4 +128,4 @@ const mapDispatchToProps = (dispatch) =>
         dispatchSetLoading: setLoading,
     }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ABMPost);
